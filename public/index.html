@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>United Holidays - UK Travel Agency | Flights, Hotels & Holiday Packages</title>
+  <meta name="description" content="Explore the world with United Holidays. Affordable flights, luxury hotels, and custom holiday packages. Book your dream vacation today!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0f5fa3;
+      --primary-dark: #0a4a80;
+      --primary-light: #e8f3fb;
+      --secondary: #f5a800;
+      --secondary-dark: #d4920a;
+      --accent: #e05a00;
+      --background: #ffffff;
+      --foreground: #0a0a0a;
+      --muted: #f4f6f9;
+      --muted-fg: #555;
+      --card: #ffffff;
+      --border: #c3d9ee;
+      --green-wa: #25D366;
+      --green-wa-dark: #20BA5A;
+      --radius: 0.5rem;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-heading: 'DM Sans', -apple-system, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--background);
+      color: var(--foreground);
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+    }
+    h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    .min-h-screen { min-height: 100vh; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    .gap-8 { gap: 2rem; }
+    .grid { display: grid; }
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .relative { position: relative; }
+    .absolute { position: absolute; }
+    .fixed { position: fixed; }
+    .sticky { position: sticky; }
+    .inset-0 { inset: 0; }
+    .overflow-hidden { overflow: hidden; }
+    .hidden { display: none; }
+    .block { display: block; }
+    .w-full { width: 100%; }
+    .flex-1 { flex: 1; }
+    .shrink-0 { flex-shrink: 0; }
+    .mt-auto { margin-top: auto; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: var(--radius);
+      font-size: 1rem; font-weight: 600; border: none; cursor: pointer;
+      transition: all 0.2s; white-space: nowrap; text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-secondary { background: var(--secondary); color: #fff; }
+    .btn-secondary:hover { background: var(--secondary-dark); }
+    .btn-whatsapp { background: var(--green-wa); color: #fff; }
+    .btn-whatsapp:hover { background: var(--green-wa-dark); }
+    .btn-outline {
+      background: transparent; color: var(--primary);
+      border: 1.5px solid var(--primary);
+    }
+    .btn-outline:hover { background: var(--primary-light); }
+    .btn-outline-white {
+      background: transparent; color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.6);
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.12); }
+    .btn-sm { padding: 0.5rem 1rem; font-size: 0.875rem; }
+    .btn-lg { padding: 1rem 2rem; font-size: 1.1rem; min-height: 56px; }
+
+    /* ── HEADER / NAV ── */
+    header.site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff; border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 1rem; max-width: 1200px; margin: 0 auto;
+    }
+    .logo {
+      font-family: var(--font-heading); font-size: 1.4rem;
+      font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.5rem;
+    }
+    .logo-mark {
+      width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
+      flex-shrink: 0;
+    }
+    nav.main-nav { display: flex; align-items: center; gap: 0.25rem; }
+    nav.main-nav a {
+      padding: 0.5rem 0.9rem; border-radius: var(--radius);
+      font-size: 0.95rem; font-weight: 500; color: var(--foreground);
+      transition: background 0.15s, color 0.15s;
+    }
+    nav.main-nav a:hover, nav.main-nav a.active { background: var(--primary-light); color: var(--primary); }
+    .header-ctas { display: flex; gap: 0.5rem; align-items: center; }
+    .hamburger { display: none; background: none; border: none; padding: 0.5rem; cursor: pointer; }
+    .hamburger svg { display: block; }
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 0.25rem;
+      padding: 1rem; border-top: 1px solid var(--border); background: #fff;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 0.75rem 1rem; border-radius: var(--radius);
+      font-weight: 500; color: var(--foreground);
+    }
+    .mobile-menu a:hover { background: var(--primary-light); color: var(--primary); }
+    .mobile-menu .btn { margin-top: 0.5rem; justify-content: center; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 600px; display: flex;
+      align-items: center; justify-content: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; background-size: cover; background-position: center;
+      background-image: url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1600&q=80');
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,30,60,0.72), rgba(10,30,60,0.52));
+    }
+    .hero-content {
+      position: relative; z-index: 1; text-align: center; color: #fff;
+      padding: 2rem 1rem; max-width: 820px; margin: 0 auto;
+    }
+    .hero-content h1 {
+      font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 700;
+      line-height: 1.15; margin-bottom: 1.25rem;
+    }
+    .hero-content p {
+      font-size: clamp(1rem, 2vw, 1.25rem); opacity: 0.92;
+      margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── MARQUEE ── */
+    .marquee-bar {
+      background: var(--secondary); color: #fff;
+      padding: 0.75rem 0; overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 2rem; align-items: center;
+      white-space: nowrap; animation: marquee 30s linear infinite;
+    }
+    .marquee-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 600; }
+    .marquee-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); flex-shrink: 0; }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 4rem 0; }
+    section.bg-muted { background: var(--muted); }
+    section.bg-primary { background: var(--primary); color: #fff; }
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-header h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 0.75rem;
+    }
+    .section-header p { color: var(--muted-fg); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+    .section-header.light p { color: rgba(255,255,255,0.85); }
+    .section-header.light h2 { color: #fff; }
+
+    /* ── DESTINATION CARDS ── */
+    .destinations-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .dest-card {
+      border-radius: 0.75rem; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      cursor: pointer; transition: box-shadow 0.3s, transform 0.2s;
+      position: relative;
+    }
+    .dest-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.16); transform: translateY(-2px); }
+    .dest-card-img { aspect-ratio: 4/3; overflow: hidden; position: relative; }
+    .dest-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .dest-card:hover .dest-card-img img { transform: scale(1.08); }
+    .dest-card-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,30,60,0.82), transparent 55%);
+    }
+    .dest-card-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem; }
+    .dest-card-body h3 { color: #fff; font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+    /* ── VISA CARDS ── */
+    .visa-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+    .visa-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 0.75rem; overflow: hidden;
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+    .visa-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); border-color: var(--primary); }
+    .visa-card-img { height: 160px; overflow: hidden; position: relative; }
+    .visa-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .visa-card:hover .visa-card-img img { transform: scale(1.08); }
+    .visa-card-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,30,60,0.6), transparent 55%);
+    }
+    .visa-badge {
+      position: absolute; bottom: 0.75rem; left: 0.75rem;
+      width: 40px; height: 40px; background: rgba(255,255,255,0.95);
+      border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;
+      z-index: 1;
+    }
+    .visa-card-body { padding: 1.25rem; }
+    .visa-card-body h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+    .visa-card-body p { color: var(--muted-fg); font-size: 0.85rem; margin-bottom: 0.75rem; line-height: 1.5; }
+    .visa-countries { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 1rem; }
+    .visa-countries svg { color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+    .visa-countries span { font-size: 0.75rem; color: var(--muted-fg); }
+
+    /* ── WHY CHOOSE US ── */
+    .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+    .feature-card {
+      background: var(--card); padding: 1.75rem; border-radius: 0.75rem;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06); transition: box-shadow 0.2s;
+    }
+    .feature-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .feature-icon {
+      width: 48px; height: 48px; background: var(--primary-light);
+      border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .feature-icon svg { color: var(--primary); }
+    .feature-card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+    .feature-card p { color: var(--muted-fg); font-size: 0.95rem; line-height: 1.6; }
+
+    /* ── FORM ── */
+    .form-card {
+      background: var(--card); padding: 2.5rem; border-radius: 1rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08); max-width: 760px; margin: 0 auto;
+    }
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.9rem; font-weight: 500; }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 0.75rem 1rem; border: 1.5px solid var(--border);
+      border-radius: var(--radius); font-size: 1rem; font-family: inherit;
+      background: #fff; color: var(--foreground); outline: none;
+      transition: border-color 0.2s;
+      min-height: 48px;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--primary);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+    .testimonial-card {
+      background: var(--card); padding: 1.75rem; border-radius: 0.75rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .stars { display: flex; gap: 0.2rem; margin-bottom: 1rem; }
+    .star { color: var(--secondary); font-size: 1.1rem; }
+    .testimonial-card p { color: var(--muted-fg); font-style: italic; margin-bottom: 1.25rem; line-height: 1.7; }
+    .testimonial-footer { border-top: 1px solid var(--border); padding-top: 1rem; }
+    .testimonial-footer .name { font-weight: 600; }
+    .testimonial-footer .loc { font-size: 0.85rem; color: var(--muted-fg); }
+    .testimonial-footer .dest { font-size: 0.85rem; color: var(--primary); margin-top: 0.25rem; }
+
+    /* ── FAQ ── */
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+    .faq-card {
+      background: var(--card); padding: 1.5rem; border-radius: 0.75rem;
+      border: 1px solid var(--border);
+    }
+    .faq-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .faq-card p { color: var(--muted-fg); font-size: 0.9rem; line-height: 1.65; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter-form { display: flex; gap: 0.75rem; max-width: 480px; margin: 0 auto; }
+    .newsletter-form input {
+      flex: 1; padding: 0.875rem 1rem; border-radius: var(--radius);
+      border: none; font-size: 1rem; color: var(--foreground); outline: none;
+    }
+    .newsletter-note { font-size: 0.85rem; opacity: 0.7; margin-top: 1rem; }
+
+    /* ── TRUST BADGES ── */
+    .trust-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; }
+    .trust-badge { display: flex; align-items: center; gap: 0.75rem; }
+    .trust-badge svg { color: var(--primary); }
+    .trust-badge-text strong { display: block; font-size: 1rem; }
+    .trust-badge-text span { font-size: 0.85rem; color: var(--muted-fg); }
+
+    /* ── FLOATING WHATSAPP ── */
+    .whatsapp-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: var(--green-wa); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.45);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .whatsapp-float:hover { background: var(--green-wa-dark); transform: scale(1.1); }
+
+    /* ── FOOTER ── */
+    footer.site-footer { background: #0a1c30; color: rgba(255,255,255,0.85); padding: 3rem 0 1.5rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+    .footer-col h4 { color: #fff; font-size: 1rem; margin-bottom: 1rem; font-family: var(--font-heading); }
+    .footer-col p { font-size: 0.9rem; line-height: 1.7; opacity: 0.8; margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col ul a { font-size: 0.9rem; opacity: 0.8; transition: opacity 0.15s; }
+    .footer-col ul a:hover { opacity: 1; color: var(--secondary); }
+    .footer-contact-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem; }
+    .footer-contact-item a { opacity: 1; }
+    .footer-contact-item a:hover { color: var(--secondary); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;
+      text-align: center; font-size: 0.85rem; opacity: 0.6;
+    }
+    .footer-logo { color: #fff; font-size: 1.3rem; font-weight: 700; font-family: var(--font-heading); margin-bottom: 0.75rem; }
+
+    /* ── PAGE SECTIONS (non-home) ── */
+    .page-hero {
+      background: var(--primary); color: #fff;
+      padding: 5rem 1rem; text-align: center;
+    }
+    .page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+    .page-hero p { font-size: 1.15rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+    /* ── DESTINATIONS PAGE ── */
+    .dest-full-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .dest-full-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 0.75rem; overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      transition: box-shadow 0.3s;
+    }
+    .dest-full-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.12); }
+    .dest-full-img { height: 260px; overflow: hidden; position: relative; }
+    .dest-full-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .dest-full-card:hover .dest-full-img img { transform: scale(1.06); }
+    .price-badge {
+      position: absolute; top: 1rem; right: 1rem;
+      background: var(--secondary); color: #fff;
+      padding: 0.4rem 1rem; border-radius: 999px; font-weight: 700; font-size: 0.95rem;
+    }
+    .rating-badge {
+      position: absolute; bottom: 1rem; left: 1rem;
+      background: rgba(255,255,255,0.95); color: var(--foreground);
+      padding: 0.35rem 0.75rem; border-radius: 999px;
+      display: flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; font-weight: 600;
+    }
+    .rating-badge svg { color: var(--secondary); }
+    .dest-full-body { padding: 1.5rem; }
+    .dest-full-body h3 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    .dest-location { display: flex; align-items: center; gap: 0.4rem; color: var(--muted-fg); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .dest-full-body > p { color: var(--muted-fg); font-size: 0.95rem; line-height: 1.65; margin-bottom: 1.25rem; }
+    .highlights-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted-fg); font-weight: 600; margin-bottom: 0.6rem; }
+    .highlights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .highlight-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; }
+    .highlight-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
+    .pkg-meta { display: flex; gap: 1.5rem; font-size: 0.875rem; color: var(--muted-fg); margin-bottom: 1.25rem; }
+    .pkg-meta-item { display: flex; align-items: center; gap: 0.4rem; }
+    .dest-btns { display: flex; flex-direction: column; gap: 0.6rem; }
+    .dest-btns-row { display: flex; gap: 0.6rem; }
+    .dest-btns-row .btn { flex: 1; }
+
+    /* ── CONTACT PAGE ── */
+    .contact-methods { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 3rem; }
+    .contact-method-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 0.75rem; padding: 2rem 1.5rem; text-align: center;
+      cursor: pointer; transition: box-shadow 0.2s, transform 0.2s;
+      text-decoration: none; color: inherit; display: block;
+    }
+    .contact-method-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .contact-method-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem; transition: transform 0.2s;
+    }
+    .contact-method-card:hover .contact-method-icon { transform: scale(1.1); }
+    .contact-method-card h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+    .contact-method-card .desc { color: var(--muted-fg); font-size: 0.875rem; margin-bottom: 0.6rem; }
+    .contact-method-card .val { font-weight: 600; color: var(--primary); }
+    .contact-info-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+    .info-card { background: var(--card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.75rem; }
+    .info-card h3 { font-size: 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; }
+    .office-hours { display: flex; flex-direction: column; gap: 0.75rem; }
+    .office-hours-row { display: flex; justify-content: space-between; font-size: 0.9rem; }
+    .office-hours-row .day { font-weight: 500; }
+    .office-hours-row .time { color: var(--muted-fg); }
+    .office-hours-note { border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: 0.75rem; font-size: 0.85rem; color: var(--muted-fg); }
+    .location-details { font-size: 0.9rem; }
+    .location-details p { margin-bottom: 0.4rem; }
+    .location-link { display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; margin-bottom: 0.4rem; }
+    .location-link svg { color: var(--primary); }
+    .location-link a { color: var(--foreground); transition: color 0.15s; }
+    .location-link a:hover { color: var(--primary); }
+    .info-card.primary-card { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .info-card.primary-card h3 { color: #fff; }
+    .info-card.primary-card .desc-sm { opacity: 0.8; font-size: 0.875rem; margin-bottom: 1.25rem; }
+    .info-card.primary-card .btn-group { display: flex; flex-direction: column; gap: 0.6rem; }
+
+    /* ── ABOUT PAGE ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .about-img { border-radius: 1rem; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .about-img img { width: 100%; height: 380px; object-fit: cover; }
+    .about-text h2 { font-size: 2rem; margin-bottom: 1rem; }
+    .about-text p { color: var(--muted-fg); line-height: 1.8; margin-bottom: 1rem; }
+    .about-checks { display: flex; flex-direction: column; gap: 0.65rem; margin-top: 1.25rem; }
+    .about-check { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.95rem; }
+    .about-check svg { color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+    .stat-card {
+      background: var(--card); padding: 2rem; border-radius: 0.75rem;
+      text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .stat-card .stat-num { font-size: 2.5rem; font-weight: 700; color: var(--primary); font-family: var(--font-heading); }
+    .stat-card .stat-label { color: var(--muted-fg); font-size: 0.9rem; margin-top: 0.3rem; }
+    .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+    .team-card { background: var(--card); border-radius: 0.75rem; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+    .team-img { height: 200px; overflow: hidden; }
+    .team-img img { width: 100%; height: 100%; object-fit: cover; }
+    .team-body { padding: 1.25rem; text-align: center; }
+    .team-body h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+    .team-body .role { color: var(--primary); font-size: 0.875rem; font-weight: 500; }
+
+    /* ── SPA NAV ── */
+    [data-page] { display: none; }
+    [data-page].active { display: block; }
+
+    /* ── UTILS ── */
+    .check-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .check-item { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; }
+    .check-item svg { color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+    .visa-cta { text-align: center; margin-top: 3rem; }
+    .visa-cta p { color: var(--muted-fg); margin-bottom: 1.5rem; }
+    .cta-btn-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .cta-section { text-align: center; max-width: 700px; margin: 0 auto; }
+    .cta-section h2 { font-size: 2rem; margin-bottom: 0.75rem; }
+    .cta-section p { color: var(--muted-fg); font-size: 1.05rem; margin-bottom: 2rem; }
+    .trust-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; color: var(--muted-fg); text-align: center; margin-bottom: 1.5rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .visa-grid { grid-template-columns: repeat(2,1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 768px) {
+      .destinations-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .form-grid-2 { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .contact-methods { grid-template-columns: 1fr; }
+      .contact-info-grid { grid-template-columns: 1fr; }
+      .dest-full-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      nav.main-nav { display: none; }
+      .header-ctas { display: none; }
+      .hamburger { display: flex; }
+      .hero { min-height: 500px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .team-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .dest-btns-row { flex-direction: column; }
+      .visa-grid { grid-template-columns: 1fr; }
+    }
+
+    /* SVG icons inline */
+    .icon { display: inline-block; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     HEADER
+════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" onclick="showPage('home')" class="logo">
+      <img src="assets/logo.png" alt="United Holidays" class="logo-mark" />
+      <span id="site-name-text">United Holidays</span>
+    </a>
+    <nav class="main-nav">
+      <a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a>
+      <a href="#" onclick="showPage('destinations')" id="nav-destinations">Destinations</a>
+      <a href="#" onclick="showPage('about')" id="nav-about">About</a>
+      <a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a>
+    </nav>
+    <div class="header-ctas">
+      <a href="tel:+447418359679" data-tel-link class="btn btn-outline btn-sm">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <span id="header-phone-text">074 1835 9679</span>
+      </a>
+      <a href="https://wa.me/447418359679" data-wa-link target="_blank" class="btn btn-whatsapp btn-sm">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+    <button class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+      <svg id="ham-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#" onclick="showPage('home');closeMobile()">Home</a>
+    <a href="#" onclick="showPage('destinations');closeMobile()">Destinations</a>
+    <a href="#" onclick="showPage('about');closeMobile()">About</a>
+    <a href="#" onclick="showPage('contact');closeMobile()">Contact</a>
+    <a href="tel:+447418359679" data-tel-link class="btn btn-primary">📞 Call Now</a>
+    <a href="https://wa.me/447418359679" data-wa-link target="_blank" class="btn btn-whatsapp">💬 WhatsApp</a>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════
+     PAGE: HOME
+════════════════════════════════════════ -->
+<div data-page="home" class="active">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-content">
+      <h1 id="hero-heading">Explore the World with United Holidays</h1>
+      <p id="hero-description">Discover affordable holiday packages, flights, and luxury hotels worldwide. Your dream vacation starts here.</p>
+      <div class="hero-btns">
+        <a href="tel:+447418359679" id="hero-primary-btn" class="btn btn-primary btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span id="hero-primary-btn-text">Call Now</span>
+        </a>
+        <a href="https://wa.me/447418359679" id="hero-secondary-btn" target="_blank" class="btn btn-whatsapp btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span id="hero-secondary-btn-text">WhatsApp Now</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee-bar">
+    <div class="marquee-track" id="marquee-track">
+      <div class="marquee-item">✈️ Flights Worldwide</div><div class="marquee-dot"></div>
+      <div class="marquee-item">🏨 Luxury Hotels</div><div class="marquee-dot"></div>
+      <div class="marquee-item">🕌 Umrah Packages</div><div class="marquee-dot"></div>
+      <div class="marquee-item">👥 Group Travel</div><div class="marquee-dot"></div>
+      <div class="marquee-item">💼 Business Class</div><div class="marquee-dot"></div>
+      <div class="marquee-item">⛷️ Ski Holidays</div><div class="marquee-dot"></div>
+      <div class="marquee-item">🏖️ Beach Resorts</div><div class="marquee-dot"></div>
+      <div class="marquee-item">💑 Honeymoon Packages</div><div class="marquee-dot"></div>
+    </div>
+  </div>
+
+  <!-- Popular Destinations -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Popular Destinations</h2>
+        <p>Discover our most sought-after travel destinations around the world</p>
+      </div>
+      <div class="destinations-grid" id="destinations-grid">
+        <!-- populated by js/site.js from featured destinations -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Visa Services -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Visa Services</h2>
+        <p>Professional visa assistance for your international travel needs</p>
+      </div>
+      <div class="visa-grid" id="visa-grid">
+        <!-- populated by js/site.js -->
+      </div>
+      <div class="visa-cta">
+        <p>Need help with your visa application? Our expert team is here to assist you.</p>
+        <div class="cta-btn-row">
+          <a href="tel:+447418359679" data-tel-link class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Call for Visa Consultation
+          </a>
+          <a href="https://wa.me/447418359679" data-wa-link target="_blank" class="btn btn-whatsapp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="bg-muted">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Choose United Holidays?</h2>
+        <p>Your trusted partner for unforgettable travel experiences</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <h3>Best Prices</h3>
+          <p>Competitive rates on flights, hotels, and packages with our best price guarantee.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Trusted UK Agency</h3>
+          <p>ATOL protected and fully licensed travel agency with 10+ years of experience.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <h3>24/7 Support</h3>
+          <p>Round-the-clock customer service for your peace of mind before and during travel.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+          <h3>Custom Packages</h3>
+          <p>Tailored holidays designed around your preferences, schedule and budget.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <h3>Expert Team</h3>
+          <p>Experienced travel consultants with deep knowledge of global destinations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+          <h3>Worldwide Travel</h3>
+          <p>Access to hundreds of destinations across every continent of the globe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Free Quote Form -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Get Your Free Quote</h2>
+        <p>Tell us about your dream holiday and we'll create a personalised package for you</p>
+      </div>
+      <div class="form-card">
+        <form onsubmit="handleQuoteForm(event)">
+          <div class="form-grid-2" style="margin-bottom:1.25rem">
+            <div class="form-group">
+              <label for="q-name">Full Name *</label>
+              <input id="q-name" type="text" required placeholder="John Smith" autocomplete="name"/>
+            </div>
+            <div class="form-group">
+              <label for="q-phone">Phone Number *</label>
+              <input id="q-phone" type="tel" required placeholder="07123 456789" autocomplete="tel"/>
+            </div>
+          </div>
+          <div class="form-grid-2" style="margin-bottom:1.25rem">
+            <div class="form-group">
+              <label for="q-email">Email Address *</label>
+              <input id="q-email" type="email" required placeholder="john@example.com" autocomplete="email"/>
+            </div>
+            <div class="form-group">
+              <label for="q-dest">Destination *</label>
+              <select id="q-dest" required>
+                <option value="">Select destination</option>
+                <option value="Maldives">Maldives</option>
+                <option value="Switzerland">Switzerland</option>
+                <option value="Makkah">Makkah</option>
+                <option value="Madinah">Madinah</option>
+                <option value="New York">New York</option>
+                <option value="Bali">Bali</option>
+                <option value="Dubai">Dubai</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:1.25rem">
+            <label for="q-date">Travel Date *</label>
+            <input id="q-date" type="date" required/>
+          </div>
+          <div class="form-group" style="margin-bottom:1.5rem">
+            <label for="q-msg">Message</label>
+            <textarea id="q-msg" placeholder="Tell us about your travel preferences, number of travelers, budget, etc." rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg w-full">Get a Free Quote</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="bg-muted">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Our Customers Say</h2>
+        <p>Real experiences from travellers who trusted us with their journeys</p>
+      </div>
+      <div class="testimonials-grid" id="testimonials-grid">
+        <!-- populated by js/site.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Quick answers to common questions about booking with United Holidays</p>
+      </div>
+      <div class="faq-grid" id="faq-grid-home">
+        <!-- populated by js/site.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="bg-primary">
+    <div class="container">
+      <div style="max-width:680px;margin:0 auto;text-align:center;">
+        <h2 style="color:#fff;font-size:clamp(1.75rem,3vw,2.25rem);margin-bottom:1rem;">Get Exclusive Travel Deals</h2>
+        <p style="color:rgba(255,255,255,0.88);font-size:1.05rem;margin-bottom:2rem;">Subscribe to our newsletter for special offers, travel tips, and early access to amazing deals</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="email" placeholder="Enter your email address" required/>
+          <button type="submit" class="btn btn-secondary">Subscribe</button>
+        </form>
+        <p class="newsletter-note" style="color:rgba(255,255,255,0.65);">We respect your privacy. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <section class="bg-muted">
+    <div class="container">
+      <p class="trust-label">Trusted &amp; Secure</p>
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0f5fa3" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="trust-badge-text"><strong>Secure Payments</strong><span>SSL Encrypted</span></div>
+        </div>
+        <div class="trust-badge">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0f5fa3" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+          <div class="trust-badge-text"><strong>Trusted Agency</strong><span>10+ Years Experience</span></div>
+        </div>
+        <div class="trust-badge">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0f5fa3" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <div class="trust-badge-text"><strong>Best Price Guarantee</strong><span>Competitive Rates</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /home -->
+
+<!-- ════════════════════════════════════════
+     PAGE: DESTINATIONS
+════════════════════════════════════════ -->
+<div data-page="destinations">
+  <div class="page-hero">
+    <h1>Discover Your Next Adventure</h1>
+    <p>Handpicked destinations around the world with exclusive packages tailored for UK travellers</p>
+  </div>
+  <section>
+    <div class="container">
+      <div class="dest-full-grid" id="dest-full-grid">
+        <!-- populated by js/site.js -->
+      </div>
+    </div>
+  </section>
+  <section class="bg-muted">
+    <div class="container">
+      <div class="cta-section">
+        <h2>Can't Find Your Dream Destination?</h2>
+        <p>We offer packages to destinations worldwide. Contact our travel experts to create a custom itinerary just for you.</p>
+        <div class="cta-btn-row">
+          <a href="tel:+447418359679" data-tel-link class="btn btn-primary btn-lg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Call Us Now</a>
+          <a href="https://wa.me/447418359679" data-wa-link target="_blank" class="btn btn-whatsapp btn-lg">💬 WhatsApp Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /destinations -->
+
+<!-- ════════════════════════════════════════
+     PAGE: ABOUT
+════════════════════════════════════════ -->
+<div data-page="about">
+  <div class="page-hero">
+    <h1>About United Holidays</h1>
+    <p>Your trusted travel partner with over a decade of creating unforgettable journeys</p>
+  </div>
+  <section>
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&q=80" alt="Travel" loading="lazy" id="about-image"/>
+        </div>
+        <div class="about-text">
+          <h2 id="about-heading">Who We Are</h2>
+          <p id="about-paragraph1">United Holidays is a leading UK-based travel agency dedicated to making your dream holidays a reality. Founded over a decade ago, we have helped thousands of travellers explore the world with confidence and ease.</p>
+          <p id="about-paragraph2">From spiritual Umrah journeys to luxury Maldives retreats, Swiss ski adventures to cultural tours of Asia — we craft bespoke travel experiences tailored to every budget and preference.</p>
+          <div class="about-checks" id="about-checks">
+            <div class="about-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> ATOL Protected — your money is safe with us</div>
+            <div class="about-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Over 10,000 happy travellers served</div>
+            <div class="about-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Specialist in Umrah & Hajj packages</div>
+            <div class="about-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Flexible payment options available</div>
+            <div class="about-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 24/7 customer support</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-muted">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Numbers</h2>
+        <p>A track record of delivering exceptional travel experiences</p>
+      </div>
+      <div class="stats-grid" id="about-stats-grid">
+        <div class="stat-card"><div class="stat-num">10+</div><div class="stat-label">Years in Business</div></div>
+        <div class="stat-card"><div class="stat-num">10k+</div><div class="stat-label">Happy Travellers</div></div>
+        <div class="stat-card"><div class="stat-num">50+</div><div class="stat-label">Destinations</div></div>
+        <div class="stat-card"><div class="stat-num">4.9★</div><div class="stat-label">Average Rating</div></div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Travel With Us</h2>
+        <p>We go the extra mile so you don't have to worry about a thing</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>ATOL Protected</h3>
+          <p>All our flight-inclusive packages are ATOL protected, so you have complete financial protection if anything goes wrong.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+          <h3>Best Price Guarantee</h3>
+          <p>We negotiate the best rates with airlines, hotels, and operators so you always get maximum value for your money.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <h3>Visa Specialists</h3>
+          <p>Our experienced visa team handles everything from Schengen to US visas, with a high approval rate and full document support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-primary">
+    <div class="container" style="text-align:center;">
+      <h2 style="color:#fff;font-size:2rem;margin-bottom:1rem;">Ready to Start Your Journey?</h2>
+      <p style="color:rgba(255,255,255,0.88);font-size:1.05rem;margin-bottom:2rem;">Get in touch with our team today and let us plan your perfect holiday</p>
+      <div class="cta-btn-row">
+        <a href="tel:+447418359679" data-tel-link class="btn btn-secondary btn-lg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Call Now</a>
+        <a href="#" onclick="showPage('contact')" class="btn btn-outline-white btn-lg">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</div><!-- /about -->
+
+<!-- ════════════════════════════════════════
+     PAGE: CONTACT
+════════════════════════════════════════ -->
+<div data-page="contact">
+  <div class="page-hero">
+    <h1>Get In Touch</h1>
+    <p>Our travel experts are here to help you plan your perfect journey</p>
+  </div>
+  <section>
+    <div class="container">
+      <div class="contact-methods">
+        <a href="tel:+447418359679" data-tel-link class="contact-method-card">
+          <div class="contact-method-icon" style="background:var(--primary);">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <h3>Call Us</h3>
+          <p class="desc">Speak directly with our travel experts</p>
+          <p class="val" id="contact-phone-val">074 1835 9679</p>
+        </a>
+        <a href="https://wa.me/447418359679" data-wa-link target="_blank" class="contact-method-card">
+          <div class="contact-method-icon" style="background:var(--green-wa);">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <h3>WhatsApp</h3>
+          <p class="desc">Quick responses via WhatsApp</p>
+          <p class="val">Chat with us</p>
+        </a>
+        <a href="mailto:info@unitedholidays.co.uk" data-email-link class="contact-method-card">
+          <div class="contact-method-icon" style="background:var(--accent);">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3>Email</h3>
+          <p class="desc">Send us a detailed enquiry</p>
+          <p class="val" id="contact-email-val">info@unitedholidays.co.uk</p>
+        </a>
+      </div>
+
+      <div class="contact-info-grid">
+        <!-- Form -->
+        <div class="info-card">
+          <h3>Send Us a Message</h3>
+          <p style="color:var(--muted-fg);font-size:0.9rem;margin-bottom:1.5rem;">Fill out the form and we'll get back to you within 24 hours</p>
+          <form onsubmit="handleContactForm(event)">
+            <div class="form-grid-2" style="margin-bottom:1.25rem">
+              <div class="form-group">
+                <label for="c-name">Full Name *</label>
+                <input id="c-name" type="text" required placeholder="John Smith"/>
+              </div>
+              <div class="form-group">
+                <label for="c-phone">Phone *</label>
+                <input id="c-phone" type="tel" required placeholder="07123 456789"/>
+              </div>
+            </div>
+            <div class="form-grid-2" style="margin-bottom:1.25rem">
+              <div class="form-group">
+                <label for="c-email">Email *</label>
+                <input id="c-email" type="email" required placeholder="john@example.com"/>
+              </div>
+              <div class="form-group">
+                <label for="c-subject">Subject</label>
+                <input id="c-subject" type="text" placeholder="General Enquiry"/>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:1.5rem">
+              <label for="c-msg">Message *</label>
+              <textarea id="c-msg" required rows="6" placeholder="Tell us how we can help..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-full">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Sidebar -->
+        <div style="display:flex;flex-direction:column;gap:1.5rem;">
+          <div class="info-card">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Office Hours</h3>
+            <div class="office-hours" id="office-hours-container">
+              <div class="office-hours-row"><span class="day">Monday – Friday</span><span class="time">9:00 AM – 8:00 PM</span></div>
+              <div class="office-hours-row"><span class="day">Saturday</span><span class="time">10:00 AM – 6:00 PM</span></div>
+              <div class="office-hours-row"><span class="day">Sunday</span><span class="time">10:00 AM – 4:00 PM</span></div>
+              <div class="office-hours-note" id="office-hours-note">Emergency support available 24/7 for existing bookings</div>
+            </div>
+          </div>
+          <div class="info-card">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Our Location</h3>
+            <div class="location-details">
+              <p style="font-weight:600;margin-bottom:0.25rem;" id="location-site-name">United Holidays</p>
+              <p style="color:var(--muted-fg);margin-bottom:1rem;" id="location-address">London, United Kingdom</p>
+              <div class="location-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><a href="tel:+447418359679" data-tel-link data-phone-text>074 1835 9679</a></div>
+              <div class="location-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:info@unitedholidays.co.uk" data-email-link data-email-text>info@unitedholidays.co.uk</a></div>
+            </div>
+          </div>
+          <div class="info-card primary-card">
+            <h3>Need Immediate Assistance?</h3>
+            <p class="desc-sm">Our team is ready to help you right now</p>
+            <div class="btn-group">
+              <a href="tel:+447418359679" data-tel-link class="btn btn-secondary w-full"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Call Now</a>
+              <a href="https://wa.me/447418359679" data-wa-link target="_blank" class="btn btn-whatsapp w-full">💬 WhatsApp Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-muted">
+    <div class="container">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Quick answers to common questions</p>
+      </div>
+      <div class="faq-grid" id="faq-grid-contact">
+        <!-- populated by js/site.js -->
+      </div>
+    </div>
+  </section>
+</div><!-- /contact -->
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-logo">✈ <span id="footer-site-name">United Holidays</span></div>
+        <p id="footer-about-text">Your trusted UK travel agency for over 10 years. We specialise in affordable holidays, Umrah packages, visa services, and luxury travel worldwide.</p>
+        <div class="footer-contact-item"><span>📞</span><a href="tel:+447418359679" data-tel-link data-phone-text>074 1835 9679</a></div>
+        <div class="footer-contact-item"><span>✉️</span><a href="mailto:info@unitedholidays.co.uk" data-email-link data-email-text>info@unitedholidays.co.uk</a></div>
+        <div class="footer-contact-item"><span>📍</span><span id="footer-address">London, United Kingdom</span></div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('home')">Home</a></li>
+          <li><a href="#" onclick="showPage('destinations')">Destinations</a></li>
+          <li><a href="#" onclick="showPage('about')">About Us</a></li>
+          <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Destinations</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('destinations')">Maldives</a></li>
+          <li><a href="#" onclick="showPage('destinations')">Switzerland</a></li>
+          <li><a href="#" onclick="showPage('destinations')">Makkah & Madinah</a></li>
+          <li><a href="#" onclick="showPage('destinations')">Bali</a></li>
+          <li><a href="#" onclick="showPage('destinations')">Dubai</a></li>
+          <li><a href="#" onclick="showPage('destinations')">New York</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('contact')">Visa Assistance</a></li>
+          <li><a href="#" onclick="showPage('destinations')">Holiday Packages</a></li>
+          <li><a href="#" onclick="showPage('contact')">Umrah Packages</a></li>
+          <li><a href="#" onclick="showPage('contact')">Group Travel</a></li>
+          <li><a href="#" onclick="showPage('contact')">Business Class</a></li>
+          <li><a href="#" onclick="showPage('contact')">Honeymoon</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p id="footer-copyright">© 2025 United Holidays. All rights reserved. ATOL Protected.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/447418359679" data-wa-link target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  // ── SPA Navigation ──
+  function showPage(name) {
+    document.querySelectorAll('[data-page]').forEach(p => p.classList.remove('active'));
+    document.querySelector('[data-page="' + name + '"]').classList.add('active');
+    document.querySelectorAll('nav.main-nav a').forEach(a => a.classList.remove('active'));
+    const navEl = document.getElementById('nav-' + name);
+    if (navEl) navEl.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+
+  // ── Mobile menu ──
+  function toggleMobile() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+  function closeMobile() {
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+
+  // ── Quote Form ──
+  function handleQuoteForm(e) {
+    e.preventDefault();
+    const name = document.getElementById('q-name').value;
+    const phone = document.getElementById('q-phone').value;
+    const email = document.getElementById('q-email').value;
+    const dest = document.getElementById('q-dest').value;
+    const date = document.getElementById('q-date').value;
+    const msg = document.getElementById('q-msg').value;
+    const text = `*New Quote Request from United Holidays Website*\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email}\n*Destination:* ${dest}\n*Travel Date:* ${date}\n*Message:* ${msg || 'No additional message'}\n\nPlease contact this customer as soon as possible.`;
+    window.open('https://wa.me/447418359679?text=' + encodeURIComponent(text), '_blank');
+    alert('Thank you! Your quote request has been sent. We will contact you shortly.');
+    e.target.reset();
+  }
+
+  // ── Contact Form ──
+  function handleContactForm(e) {
+    e.preventDefault();
+    const name = document.getElementById('c-name').value;
+    const phone = document.getElementById('c-phone').value;
+    const email = document.getElementById('c-email').value;
+    const subject = document.getElementById('c-subject').value;
+    const msg = document.getElementById('c-msg').value;
+    const text = `*New Contact Form Inquiry*\n\n*Name:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Subject:* ${subject || 'General Inquiry'}\n*Message:* ${msg}\n\nPlease respond to this inquiry as soon as possible.`;
+    window.open('https://wa.me/447418359679?text=' + encodeURIComponent(text), '_blank');
+    alert('Thank you for contacting us! We will get back to you shortly.');
+    e.target.reset();
+  }
+
+  // ── Newsletter ──
+  function handleNewsletter(e) {
+    e.preventDefault();
+    alert('Thank you for subscribing! We\'ll send you the latest travel deals.');
+    e.target.reset();
+  }
+
+  // ── Scroll animations (lightweight) ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.feature-card, .testimonial-card, .faq-card, .dest-card, .visa-card, .stat-card, .dest-full-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+<script src="js/site.js"></script>
+</body>
+</html>
